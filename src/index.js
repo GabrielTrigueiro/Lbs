@@ -1,17 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from "@mui/material";
+import FullScreenContainer from "app/components/layout/layout";
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PositivoTheme from "theme";
+import App from "./App";
+import store, { persistor } from "./core/redux/store";
+import "./index.css";
+import { PersistGate } from "redux-persist/integration/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+const query = new QueryClient();
+
+ReactDOM.render(
+    <React.StrictMode>
+        <ThemeProvider theme={PositivoTheme}>
+            <QueryClientProvider client={query}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <Provider store={store}>
+                        <ToastContainer />
+                        <BrowserRouter>
+                            <FullScreenContainer>
+                                <App />
+                            </FullScreenContainer>
+                        </BrowserRouter>
+                    </Provider>
+                </PersistGate>
+            </QueryClientProvider>
+        </ThemeProvider>
+    </React.StrictMode>,
+    document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
