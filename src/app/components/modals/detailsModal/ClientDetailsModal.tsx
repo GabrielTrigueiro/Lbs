@@ -26,7 +26,7 @@ const ClientDetailsModal = (props: IClientDetailsProps) => {
           <Container>
             <InfosSection>
               <InfoCardContainer>
-                <InfoCardTitle sx={{ width: "23%" }}>Informações gerais</InfoCardTitle>
+                <InfoCardTitle sx={{ width: "25%" }}>Informações gerais</InfoCardTitle>
                 <InfoCard>
                   <InfoRow>
                     <InfoKey>Nome:</InfoKey>
@@ -55,7 +55,7 @@ const ClientDetailsModal = (props: IClientDetailsProps) => {
             <Box sx={{ display: "flex", flexDirection: "row" }}>
               <InfosSection sx={{ flex: 1 }}>
                 <InfoCardContainer >
-                  <InfoCardTitle sx={{ width: "65%" }}>Informações de endereço</InfoCardTitle>
+                  <InfoCardTitle sx={{ width: "70%" }}>Informações de endereço</InfoCardTitle>
                   <InfoCard>
                     <InfoRow>
                       <InfoKey>CEP:</InfoKey>
@@ -87,7 +87,7 @@ const ClientDetailsModal = (props: IClientDetailsProps) => {
               </InfosSection>
               <InfosSection sx={{ flex: 1 }}>
                 <InfoCardContainer>
-                  <InfoCardTitle sx={{ width: "65%" }}>Informações de contatos</InfoCardTitle>
+                  <InfoCardTitle sx={{ width: "70%" }}>Informações de contatos</InfoCardTitle>
                   <InfoCard>
                     <InfoRow>
                       <InfoKey>Celular 1:</InfoKey>

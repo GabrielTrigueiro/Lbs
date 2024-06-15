@@ -5,9 +5,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import GenericTextField from 'app/components/genericTextField/GenericTextField'
 import { InfoCardContainer, InfoCardTitle, InfoCard } from 'app/components/styles'
 import { Notification } from 'app/components/toastNotification/toastNotification'
-import { RegisterPage, RegisterPageHeader, RegisterPageContent } from 'app/views/registerIndication/styles'
 import { AxiosError } from 'axios'
-import { ClientLbsService } from 'core/api/clientLBS/clientService'
+import { ClientLbsService } from 'core/api/client/clientService'
 import { TClientRegister } from 'core/models/clientLBS'
 import { sexoOptions, convertToBack, formatDate, formatarCEP, removeExtraSpaces, removeNonNumeric, statesOpitions } from 'core/utils/globalFunctions'
 import { Validations } from 'core/utils/validations'
@@ -15,6 +14,7 @@ import { Dayjs } from 'dayjs'
 import { getIn, useFormik } from 'formik'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { RegisterPage, RegisterPageContent, RegisterPageHeader } from './styles'
 
 function RegisterClient() {
   const navigate = useNavigate();

@@ -4,7 +4,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import GenericTextField from "app/components/genericTextField/GenericTextField";
 import { InfoCard, InfoCardContainer, InfoCardTitle } from "app/components/styles";
 import { Notification } from "app/components/toastNotification/toastNotification";
-import { RegisterPage, RegisterPageContent, RegisterPageHeader } from "app/views/registerSeller/styles";
 import { AxiosError } from "axios";
 import { CollaboratorService } from "core/api/collaborator/collaboratorService";
 import { TCollaboratorRegister } from "core/models/collaborator";
@@ -16,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Validations } from "core/utils/validations";
+import { RegisterPage, RegisterPageContent, RegisterPageHeader } from "./styles";
 
 function RegisterCollaborator() {
     const navigate = useNavigate();

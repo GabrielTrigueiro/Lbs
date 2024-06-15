@@ -1,6 +1,4 @@
 import { AxiosError } from 'axios';
-import { BrandService } from 'core/api/brand/brandService';
-import { TBrandBody, TBrandUpdate } from 'core/models/brand';
 import { deepEqual } from 'core/utils/globalFunctions';
 import { Validations } from 'core/utils/validations';
 import { useFormik } from 'formik';
@@ -10,34 +8,36 @@ import { Box, Button } from '@mui/material';
 import { InfoCard, InfoCardContainer } from 'app/components/styles';
 import GenericTextField from 'app/components/genericTextField/GenericTextField';
 import { RegisterPage, RegisterPageContent, RegisterPageHeader } from './styles';
+import { TIndicationBody, TIndicationUpdate } from 'core/models/indication';
+import { IndicationService } from 'core/api/indication/indicationService';
 
-const EditBrand = () => {
+const EditIndication = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [brand, setBrand] = useState<TBrandBody | undefined>(location.state?.brand);
+  const [indication, setIndication] = useState<TIndicationBody | undefined>(location.state?.indication);
 
   useEffect(() => {
-    if (!location.state?.brand) {
-      navigate('/marcas');
+    if (!location.state?.indication) {
+      navigate('/indicacoes');
     }
   }, [location, navigate]);
 
-  const initialValues: TBrandUpdate = {
-    name: brand?.name || '',
-    description: brand?.description || '',
+  const initialValues: TIndicationUpdate = {
+    name: indication?.name || '',
+    description: indication?.description || '',
   };
 
 
-  const callEditBrand = async (updatedBrand: TBrandUpdate) => {
+  const callEditIndication = async (updatedIndication: TIndicationUpdate) => {
     setIsLoading(true)
 
-    let cleanedBrandUser: TBrandUpdate = {
-      name: updatedBrand.name,
-      description: updatedBrand.description,
+    let cleanedIndication: TIndicationUpdate = {
+      name: updatedIndication.name,
+      description: updatedIndication.description,
     };
-    if (brand?.id) {
-      BrandService.updateBrand(cleanedBrandUser, String(brand.id))
+    if (indication?.id) {
+      IndicationService.updateIndication(cleanedIndication, String(indication.id))
         .then((resp) => {
           handleResetStates();
           navigate(-1)
@@ -62,10 +62,10 @@ const EditBrand = () => {
   const formik = useFormik({
     initialValues,
     validateOnBlur: false,
-    validationSchema: Validations.BrandRegisterShema,
+    validationSchema: Validations.EditIndicationShema,
     validateOnChange: false,
     onSubmit: async (values, { setSubmitting }) => {
-      await callEditBrand(values);
+      await callEditIndication(values);
       setSubmitting(false);
     },
   });
@@ -78,7 +78,7 @@ const EditBrand = () => {
 
   return (
     <RegisterPage>
-      <RegisterPageHeader>Editar Marca</RegisterPageHeader>
+      <RegisterPageHeader>Editar Indicação</RegisterPageHeader>
       <RegisterPageContent>
         <Box
           sx={{
@@ -116,7 +116,7 @@ const EditBrand = () => {
           </InfoCardContainer>
         </Box>
         <Box sx={{ gap: " 1rem", display: "flex", flexDirection: "row" }}>
-          <Button disabled={isLoading} onClick={() => navigate("/marcas")} variant="outlined">
+          <Button disabled={isLoading} onClick={() => navigate("/indicacoes")} variant="outlined">
             Voltar
           </Button>
           <Button disabled={!hasChanges() || isLoading}
@@ -129,4 +129,4 @@ const EditBrand = () => {
   )
 }
 
-export default EditBrand
+export default EditIndication

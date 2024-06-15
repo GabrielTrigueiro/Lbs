@@ -3,7 +3,6 @@ import { Validations } from "core/utils/validations";
 import { getIn, useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { RegisterPage, RegisterPageContent, RegisterPageHeader } from "../registerSeller/styles";
 import { Box, Button, MenuItem, TextField } from "@mui/material";
 import { InfoCard, InfoCardContainer, InfoCardTitle } from "app/components/styles";
 import GenericTextField from "app/components/genericTextField/GenericTextField";
@@ -11,6 +10,7 @@ import { deepEqual, formatCEP, formatarCEP, removeNonNumeric, statesOpitions } f
 import { CollaboratorService } from "core/api/collaborator/collaboratorService";
 import { Notification } from "app/components/toastNotification/toastNotification";
 import { AxiosError } from "axios";
+import { RegisterPage, RegisterPageContent, RegisterPageHeader } from "./styles";
 
 const EditCollaborator = () => {
   const location = useLocation();

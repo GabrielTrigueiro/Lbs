@@ -9,7 +9,6 @@ import { fecthSupplier } from "core/querryes/supplier/supplierQuerry";
 import theme from "core/theme/theme";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ContentBody } from "../indication/styles";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import Spinner from "app/components/spinner/spinner";
 import { Add } from "@mui/icons-material";
@@ -20,6 +19,7 @@ import DefaultMenu, { IMenuItemProps } from "app/components/menu/DefaultMenu";
 import { SupplierService } from "core/api/supplier/supplierService";
 import SupplierDetailsModal from "app/components/modals/detailsModal/SupplierDetailsModal";
 import DefaultDialog from "app/components/defaultDialog/defaultDialog";
+import { ContentBody } from "../../styles";
 
 
 const head: ITableHeadCell[] = [
@@ -168,7 +168,7 @@ function Supplier() {
                 mainIcon={<Add sx={{ color: theme.COLORS.YELLOW2 }} />}
                 extraComponents={
                     <Search
-                        searchPlaceHolder="Cpf ou cnpj do fornecedor..."
+                        searchPlaceHolder="Cnpj do fornecedor..."
                         querrySearching={isLoading}
                         cpf={supplierFilters.cpforCnpj}
                         onChange={(e: string | undefined) => setSupplierFilters((prevState) => ({

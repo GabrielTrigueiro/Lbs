@@ -11,6 +11,16 @@ export function formatDocument(doc: string) {
   return doc;
 }
 
+
+export const removePointsExceptLast = (input: string): number => {
+  // Remove todos os pontos, exceto o último
+  const withoutPoints = input.replace(/\.(?=.*\.)/g, '');
+
+  // Converte para número
+  const numberValue = parseFloat(withoutPoints.replace(',', '.'));
+
+  return numberValue;
+};
 export function convertToBack(data: string): string {
   const dataSemHora = data.split(" ")[0];
   const [dia, mes, ano] = dataSemHora.split("/");
@@ -334,4 +344,14 @@ export const statesOpitions = [
 export const sexoOptions = [
   { value: 1, label: 'Feminino' },
   { value: 2, label: 'Masculino' },
+];
+
+export const indicationsOptions = [
+  { value: 1, label: 'tipo1' },
+  { value: 2, label: 'tipo2' },
+];
+
+export const activeOptins = [
+  { value: 1, label: 'Ativar' },
+  { value: 2, label: 'Desativar' },
 ];

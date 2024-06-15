@@ -6,10 +6,10 @@ import { Validations } from 'core/utils/validations';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { RegisterPage, RegisterPageContent, RegisterPageHeader } from '../registerIndication/styles';
 import { Box, Button } from '@mui/material';
 import { InfoCard, InfoCardContainer } from 'app/components/styles';
 import GenericTextField from 'app/components/genericTextField/GenericTextField';
+import { RegisterPage, RegisterPageContent, RegisterPageHeader } from './styles';
 
 const EditCategory = () => {
   const location = useLocation();
@@ -18,7 +18,7 @@ const EditCategory = () => {
   const [category, setCategory] = useState<TCategoryBody | undefined>(location.state?.category);
 
   useEffect(() => {
-    if (!location.state?.brand) {
+    if (!location.state?.category) {
       navigate('/categorias');
     }
   }, [location, navigate]);

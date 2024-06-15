@@ -6,11 +6,11 @@ import { formatarCEP, removeExtraSpaces, removeNonNumeric, statesOpitions } from
 import { getIn, useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RegisterPage, RegisterPageContent, RegisterPageHeader } from "../registerSeller/styles";
 import { Box, Button, MenuItem, TextField } from "@mui/material";
 import { InfoCard, InfoCardContainer, InfoCardTitle } from "app/components/styles";
 import GenericTextField from "app/components/genericTextField/GenericTextField";
 import { Validations } from "core/utils/validations";
+import { RegisterPage, RegisterPageContent, RegisterPageHeader } from "./styles";
 
 function RegisterSupplier() {
     const navigate = useNavigate();
@@ -282,9 +282,9 @@ function RegisterSupplier() {
                                     }}
                                     FormHelperTextProps={{
                                         style: {
-                                          margin: '1px 10px -5px ',
+                                            margin: '1px 10px -5px ',
                                         },
-                                      }}
+                                    }}
                                 >
                                     {statesOpitions.map((option) => (
                                         <MenuItem key={option.value} value={option.value}>
@@ -341,7 +341,7 @@ function RegisterSupplier() {
                     </Box>
                 </Box>
                 <Box sx={{ gap: " 1rem", display: "flex", flexDirection: "row" }}>
-                    <Button onClick={() => navigate("/colaboradores")} variant="outlined">
+                    <Button onClick={() => navigate("/fornecedores")} variant="outlined">
                         Voltar
                     </Button>
                     <Button disabled={isLoading} onClick={() => formik.handleSubmit()}>Cadastrar</Button>

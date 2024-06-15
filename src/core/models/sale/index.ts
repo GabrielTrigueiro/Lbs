@@ -1,5 +1,4 @@
 import { TNewClientBodyRequest } from "../client";
-import { TIndicationUser } from "../indication";
 import { TBoletoBodyResponse, TGetSaleResponse } from "../payment/boleto";
 import { TPixBodyResponse } from "../payment/pix";
 import { TSellerBodyRequest } from "../seller";
@@ -34,21 +33,6 @@ export type TSalePayment = {
   installments?: number | null;
   tokenContract?: null;
   isFees: boolean;
-};
-
-export type TSaleBody = {
-  id: number;
-  value: number;
-  installments: number;
-  status: string;
-  indication: TIndicationUser;
-  typePayment: "BOLETO" | "PIX";
-  seller: TSellerBodyRequest;
-  client: TNewClientBodyRequest;
-  cameThrough: string;
-  paymentMethods: TPixBodyResponse[] | TBoletoBodyResponse[];
-  createdAt: string;
-  typeSales?: Compra;
 };
 
 export type TSaleStatusType = " PENDENTE" | "EM_PAGAMENTO" | "PAGO";

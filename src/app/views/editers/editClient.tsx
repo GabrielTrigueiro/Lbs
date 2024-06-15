@@ -1,7 +1,6 @@
 import { TClientBody, TClientRegister, TClientUpdate } from 'core/models/clientLBS';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { RegisterPage, RegisterPageContent, RegisterPageHeader } from '../registerIndication/styles';
 import { Box, Button, MenuItem, TextField } from '@mui/material';
 import { Dayjs } from 'dayjs';
 import { Validations } from 'core/utils/validations';
@@ -11,8 +10,9 @@ import { InfoCard, InfoCardContainer, InfoCardTitle } from 'app/components/style
 import GenericTextField from 'app/components/genericTextField/GenericTextField';
 import { DateField, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { ClientLbsService } from 'core/api/clientLBS/clientService';
+import { ClientLbsService } from 'core/api/client/clientService';
 import { AxiosError } from 'axios';
+import { RegisterPage, RegisterPageContent, RegisterPageHeader } from './styles';
 
 const EditClient = () => {
     const location = useLocation();

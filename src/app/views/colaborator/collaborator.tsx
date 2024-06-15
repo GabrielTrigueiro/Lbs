@@ -10,7 +10,6 @@ import { fecthCollaborator } from "core/querryes/collaborator/collaboratorQuerry
 import theme from "core/theme/theme";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ContentBody } from "../indication/styles";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import Spinner from "app/components/spinner/spinner";
 import DataTable from "app/components/table/table/table";
@@ -20,6 +19,7 @@ import MoreHorizRounded from "@mui/icons-material/MoreHorizRounded";
 import CollaboratorDetailsModal from "app/components/modals/detailsModal/CollaboratorDetailsModal";
 import DefaultDialog from "app/components/defaultDialog/defaultDialog";
 import { CollaboratorService } from "core/api/collaborator/collaboratorService";
+import { ContentBody } from "app/styles";
 
 
 const head: ITableHeadCell[] = [
@@ -91,7 +91,7 @@ function Collaborator() {
                 handleAccessRowById(idCollaborator || "");
                 handleCloseMenu();
             },
-            label: "Deletar cliente",
+            label: "Deletar colaborador",
         },
         {
             function: () => {
@@ -99,7 +99,7 @@ function Collaborator() {
                 handleAccessRowById(idCollaborator || "");
                 handleCloseMenu();
             },
-            label: "Detalhes do cliente",
+            label: "Detalhes do colaborador",
         },
         {
             function: () => {
@@ -157,17 +157,17 @@ function Collaborator() {
                 mainActionFunction={() => navigate("/registrarColaborador")}
                 mainActionLabel="Cadastrar colaborador"
                 mainIcon={<Add sx={{ color: theme.COLORS.YELLOW2 }} />}
-            // extraComponents={
-            //     <Search
-            //         searchPlaceHolder="Cpf ou cnpj do cliente..."
-            //         querrySearching={isLoading}
-            //         cpf={collaboratorFilters.cpforCnpj}
-            //         onChange={(e: string | undefined) => setCollaboratorFilters((prevState) => ({
-            //             ...prevState,
-            //             cpf: e,
-            //         }))}
-            //     />
-            // }
+                extraComponents={
+                    <Search
+                        searchPlaceHolder="Nome do colaborador..."
+                        querrySearching={isLoading}
+                        cpf={collaboratorFilters.name}
+                        onChange={(e: string | undefined) => setCollaboratorFilters((prevState) => ({
+                            ...prevState,
+                            name: e,
+                        }))}
+                    />
+                }
             />
             <ContentBody>
                 {isLoading ? (

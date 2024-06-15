@@ -4,7 +4,7 @@ import { TCategoryRegister } from 'core/models/category';
 import { useFormik } from 'formik';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { RegisterPage, RegisterPageContent, RegisterPageHeader } from '../registerIndication/styles';
+import { RegisterPage, RegisterPageContent, RegisterPageHeader } from './styles';
 import { Box, Button } from '@mui/material';
 import { InfoCard, InfoCardContainer, InfoCardTitle } from 'app/components/styles';
 import GenericTextField from 'app/components/genericTextField/GenericTextField';

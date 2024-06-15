@@ -11,6 +11,7 @@ import { IPropsDataTable, ITableHeadCell } from "../../../../core/models/table";
 import StyledTableHead from "../tableHead/tableHead";
 import {
     formatCurrency,
+    formatCurrencyBR,
     formatDateBr,
     formatDocument,
     formatRG,
@@ -36,44 +37,55 @@ function returnCellContent(item: any, row: Record<string, any>, menu?: JSX.Eleme
     switch (item.name) {
         case "cpforcnpj":
             return formatDocument(row[item.name]);
+
         case "createdAt":
-            return formatDateBr(row[item.name]);
         case "updatedAt":
-            return formatDateBr(row[item.name]);
         case "created_at":
-            return formatDateBr(row[item.name]);
         case "birthDate":
             return formatDateBr(row[item.name]);
+
         case "rg":
             return formatRG(row[item.name]);
+
         case "value":
-            return `R$ ${formatCurrency(row[item.name])}`;
+            return `R$ ${formatCurrencyBR(row[item.name])}`;
+
         case "isactive":
-            return <StyledCircle isActive={row[item.name]} />;
         case "active":
             return <StyledCircle isActive={row[item.name]} />;
+
         case "neighborhood":
             return row.address?.neighborhood;
+
         case "uf":
             return row.address?.uf;
+
         case "city":
             return row.address?.city;
+
         case "cep":
             return formatarCEP(row.address?.zipCode);
+
         case "action":
             return menu && <>{menu}</>;
+
         case "qtd":
-            return accessRowById && <IconButton sx={{ width: 30, height: 30 }} onClick={() => accessRowById(row.id)}><Typography>{row.qtd}</Typography></IconButton>;
+            return accessRowById && (
+                <IconButton sx={{ width: 30, height: 30 }} onClick={() => accessRowById(row.id)}>
+                    <Typography>{row.qtd}</Typography>
+                </IconButton>
+            );
+
         case "actions2":
             return menu && accessRowById && (
                 <IconButton sx={{ width: 30, height: 30 }} onClick={() => accessRowById(row.id)}>
                     {menu}
                 </IconButton>
             );
+
         default:
             return row[item.name];
     }
-
 }
 
 const DynamicTableRow: React.FC<ITableRowProps> = ({ row, head, menu, accessRowById }) => (

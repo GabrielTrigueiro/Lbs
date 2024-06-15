@@ -6,20 +6,20 @@ import DataTable from "app/components/table/table/table";
 import TableHeader from "app/components/table/tableHeader/TableHeader";
 import { TClientFilterRequest } from "core/models/clientLBS";
 import { ITableHeadCell, Order } from "core/models/table";
-import { fecthClients } from "core/querryes/clientLBS/clientLbsQuerry";
+import { fecthClients } from "core/querryes/client/clientLbsQuerry";
 import theme from "core/theme/theme";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ContentBody } from "../indication/styles";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import Spinner from "app/components/spinner/spinner";
 import Search from "app/components/search/Search";
 import DefaultFilter, { ISelectItem } from "app/components/filter/defaultFilter";
 import DefaultMenu, { IMenuItemProps } from "app/components/menu/DefaultMenu";
 import MoreHorizRounded from "@mui/icons-material/MoreHorizRounded";
-import { ClientLbsService } from "core/api/clientLBS/clientService";
+import { ClientLbsService } from "core/api/client/clientService";
 import ClientDetailsModal from "app/components/modals/detailsModal/ClientDetailsModal";
 import DefaultDialog from "app/components/defaultDialog/defaultDialog";
+import { ContentBody } from "app/styles";
 
 const head: ITableHeadCell[] = [
     { name: "name", label: "Nome", align: "left" },

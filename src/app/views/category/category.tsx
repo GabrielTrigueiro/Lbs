@@ -11,12 +11,12 @@ import { fecthCategory } from "core/querryes/category/categoryQuerry";
 import theme from "core/theme/theme";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ContentBody } from "../indication/styles";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import Spinner from "app/components/spinner/spinner";
 import MoreHorizRounded from "@mui/icons-material/MoreHorizRounded";
 import DataTable from "app/components/table/table/table";
 import DataTablePagination from "app/components/table/pagination/pagination";
+import { ContentBody } from "app/styles";
 
 const head: ITableHeadCell[] = [
     { name: "name", label: "Nome", align: "left" },

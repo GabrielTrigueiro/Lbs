@@ -149,6 +149,18 @@ export const BRAND_SAVE = `${BACKEND_BASE_URL + "v1/brand/save"}`;
 
 // PRODUTOS
 
-export const PRODUCT_LIST = `${BACKEND_BASE_URL + "v1/"}`;
-export const PRODUCT_UPDATE = `${BACKEND_BASE_URL + "v1//update/"}`;
-export const PRODUCT_SAVE = `${BACKEND_BASE_URL + "v1//save"}`;
+export const PRODUCT_LIST = `${BACKEND_BASE_URL + "v1/product"}`;
+export const PRODUCT_UPDATE = `${BACKEND_BASE_URL + "v1/product/update/"}`;
+export const PRODUCT_SAVE = `${BACKEND_BASE_URL + "v1/product/save"}`;
+
+// collection
+
+export const COLLECTION_LIST = `${BACKEND_BASE_URL + "v1/collection"}`;
+export const COLLECTION_UPDATE = `${BACKEND_BASE_URL + "v1/collection/update/"}`;
+export const COLLECTION_SAVE = `${BACKEND_BASE_URL + "v1/collection/save"}`;
+
+// indication
+
+export const INDICATION_LIST = `${BACKEND_BASE_URL + "v1/indication"}`;
+export const INDICATION_UPDATE = `${BACKEND_BASE_URL + "v1/indication/update/"}`;
+export const INDICATION_SAVE = `${BACKEND_BASE_URL + "v1/indication/save"}`;

@@ -2,7 +2,6 @@ import { TSupplierBody, TSupplierRegister, TUpdateSupplier } from "core/models/s
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { RegisterPage, RegisterPageContent, RegisterPageHeader } from "../registerSeller/styles";
 import { Box, Button } from "@mui/material";
 import { InfoCard, InfoCardContainer, InfoCardTitle } from "app/components/styles";
 import GenericTextField from "app/components/genericTextField/GenericTextField";
@@ -10,6 +9,7 @@ import { deepEqual, formatarCEP, removeNonNumeric } from "core/utils/globalFunct
 import { SupplierService } from "core/api/supplier/supplierService";
 import { AxiosError } from "axios";
 import { Validations } from "core/utils/validations";
+import { RegisterPage, RegisterPageContent, RegisterPageHeader } from "./styles";
 
 
 
@@ -133,7 +133,7 @@ const EditSupplier = () => {
                     </InfoCardContainer>
                 </Box>
                 <Box sx={{ gap: " 1rem", display: "flex", flexDirection: "row" }}>
-                    <Button disabled={ isLoading || isValidating} onClick={() => navigate("/colaboradores")} variant="outlined">
+                    <Button disabled={ isLoading || isValidating} onClick={() => navigate("/fornecedores")} variant="outlined">
                         Voltar
                     </Button>
                     <Button disabled={!hasChanges() || isLoading || isValidating}

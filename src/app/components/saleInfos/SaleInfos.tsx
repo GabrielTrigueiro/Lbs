@@ -102,7 +102,7 @@ export const SaleInfos = () => {
             fullWidth
         />
         <Box sx={{ display: "flex", flexDirection: "row", gap: "0.5rem" }}>
-          <PriceTextField
+          {/* <PriceTextField
             small={true}
             name={"desconto"}
             label={"Desconto R$"}
@@ -115,7 +115,7 @@ export const SaleInfos = () => {
             label={"Desconto %"}
             value={0}
             onChange={(event) => {}}
-          />
+          /> */}
         </Box>
         <Box
           sx={{

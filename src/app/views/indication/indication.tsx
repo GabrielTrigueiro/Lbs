@@ -1,110 +1,125 @@
-import { Box } from "@mui/material";
+import { Add } from "@mui/icons-material";
 import { useQuery } from "@tanstack/react-query";
+import DefaultFilter, { ISelectItem } from "app/components/filter/defaultFilter";
+import DefaultMenu, { IMenuItemProps } from "app/components/menu/DefaultMenu";
+import Search from "app/components/search/Search";
+import { PageContentContainer } from "app/components/styles";
+import TableHeader from "app/components/table/tableHeader/TableHeader";
+import { ITableHeadCell, Order } from "core/models/table";
+import theme from "core/theme/theme";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AddIcon from "@mui/icons-material/Add";
-
-import DefaultFilter, {
-  ISelectItem,
-} from "app/components/filter/defaultFilter";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import Spinner from "app/components/spinner/spinner";
-import { PageContentContainer } from "app/components/styles";
-import DataTablePagination from "app/components/table/pagination/pagination";
+import MoreHorizRounded from "@mui/icons-material/MoreHorizRounded";
 import DataTable from "app/components/table/table/table";
-import useIndicationFilterHook from "core/hooks/filters/indicationFilterHook";
-import { useAppSelector } from "core/hooks/reduxHooks";
-import { ITableHeadCell, Order } from "core/models/table";
-import { fetchIndications } from "core/querryes/indication/indicationQuerry";
-import { verifyRole } from "core/utils/roles";
-import { ContentBody } from "./styles";
-import { TIndicationFilter } from "core/models/utils";
-import { removeNonNumeric } from "core/utils/globalFunctions";
-import TableHeader from "app/components/table/tableHeader/TableHeader";
-import theme from "core/theme/theme";
-import Search from "app/components/search/Search";
+import DataTablePagination from "app/components/table/pagination/pagination";
+import { ContentBody } from "app/styles";
+import { TIndicationFilterRequest } from "core/models/indication";
+import { fecthIndication } from "core/querryes/indication/indicationQuerry";
 
-const Indication = () => {
-  // const navigate = useNavigate();
-  // const { isOpen, onOpen, onClose } = useIndicationFilterHook();
-  // const basicUserInfo = useAppSelector((state) => state.auth.userInfo);
-  // const [rowsPerPage, setRowsPerPage] = useState(10);
-  // const [page, setPage] = useState(0);
-  // const [count, setCount] = useState(0);
-  // const [order, setOrder] = useState<Order>("asc");
-  // const [orderBy, setOrderBy] = useState("coupon");
-  // const [filters, setFilters] = useState<TIndicationFilter>({
-  //   coupon: undefined,
-  //   cpforcnpj: undefined,
-  // });
+const head: ITableHeadCell[] = [
+  { name: "name", label: "Nome", align: "left" },
+  { name: "description", label: "Descrição", align: "left" },
+  { name: "active", label: "Ativo", align: "left" },
+  { name: "actions2", label: "Opções", align: "left" },
+];
 
-  // const items: ISelectItem[] = [
-  //   { name: "Coupon", value: "coupon", type: "texto" },
-  //   { name: "CPF", value: "cpforcnpj", type: "texto" },
-  // ];
+const filterItems: ISelectItem[] = [
+  { name: "Nome", value: "name", type: "texto" },
+];
 
-  // const head: ITableHeadCell[] = [
-  //   { name: "id", label: "ID", align: "left" },
-  //   { name: "coupon", label: "Coupon", align: "left" },
-  //   { name: "cpforcnpj", label: "CPF", align: "left" },
-  //   { name: "isActive", label: "Ativo", align: "left" },
-  // ];
 
-  // const { isSuccess, isLoading, data } = useQuery({
-  //   queryKey: ["indications", page, rowsPerPage, orderBy, order, filters],
-  //   staleTime: Infinity,
-  //   queryFn: () =>
-  //     fetchIndications(
-  //       page,
-  //       rowsPerPage,
-  //       orderBy,
-  //       order,
-  //       filters.coupon,
-  //       removeNonNumeric(filters.cpforcnpj)
-  //     ),
-  // });
+function Indication() {
+  const navigate = useNavigate();
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0);
+  const [count, setCount] = useState(0);
+  const [order, setOrder] = useState<Order>("asc");
+  const [orderBy, setOrderBy] = useState("name");
+  const [filterModal, setFilterModal] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const [idIndication, setIdIndication] = useState<string | undefined>();
+  const [indicationFilters, setIndicationFilters] = useState<TIndicationFilterRequest>({
+    name: undefined,
+  });
 
-  // const removeFilter = (attribute: string) => {
-  //   setFilters((prevState) => ({
-  //     ...prevState,
-  //     [attribute]: undefined,
-  //   }));
-  // };
+  const handleClickMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  // useEffect(() => {
-  //   if (isSuccess && data) {
-  //     setCount(data.totalElements);
-  //   }
-  // }, [isSuccess, data]);
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
 
-  // if (!verifyRole(basicUserInfo?.roles, ["ROLE_ADMIN", "ROLE_INDICATIONS"])) {
-  //   navigate(-1);
-  // }
+  const handleAccessRowById = (id: string) => {
+    setIdIndication(id);
+  }
 
+
+
+  const menuItems: IMenuItemProps[] = [
+    {
+      function: () => {
+        handleAccessRowById(idIndication || "");
+        navigate("/editarIndicacao", { state: { indication: selectedIndication } });
+        handleCloseMenu();
+      },
+      label: "Editar Indicação",
+    },
+  ];
+
+
+
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ["indication", page, rowsPerPage, orderBy, order, indicationFilters],
+    queryFn: () =>
+      fecthIndication(
+        page,
+        rowsPerPage,
+        orderBy,
+        order,
+        indicationFilters.name,
+      ),
+    staleTime: Infinity,
+  })
+
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      setCount(data.totalElements);
+    }
+  }, [isSuccess, data]);
+
+
+  const removeFilter = (attribute: string) => {
+    setIndicationFilters((prevState) => ({
+      ...prevState,
+      [attribute]: undefined,
+    }));
+  };
+
+  const selectedIndication = data?.content.find((indication: any) => indication.id === idIndication);
   return (
     <PageContentContainer>
-      {/* <TableHeader
-        filterBtn={true}
-        filterBtnAction={() => onOpen()}
-        filter={filters}
+      <TableHeader
+        filterBtn
+        filterBtnAction={() => setFilterModal(true)}
+        filter={indicationFilters}
         remove={removeFilter}
-        mainActionLabel="Cadastrar indicação"
         mainActionFunction={() => navigate("/registrarIndicacao")}
+        mainActionLabel="Cadastrar indicação"
+        mainIcon={<Add sx={{ color: theme.COLORS.YELLOW2 }} />}
         extraComponents={
           <Search
-            searchPlaceHolder="Cpf/cnpj da indicação..."
+            searchPlaceHolder="Nome da indicação..."
             querrySearching={isLoading}
-            onChange={(e: string) => setFilters((prevState) => ({
+            cpf={indicationFilters.name}
+            onChange={(e: string | undefined) => setIndicationFilters((prevState) => ({
               ...prevState,
-              cpforcnpj: e,
+              name: e,
             }))}
-          />
-        }
-        mainIcon={
-          <AddIcon
-            sx={{
-              fontSize: "20px",
-              color: theme.COLORS.YELLOW2,
-            }}
           />
         }
       />
@@ -129,8 +144,22 @@ const Indication = () => {
             orderBy={orderBy}
             setOrder={setOrder}
             setOrderBy={setOrderBy}
+            accessRowById={handleAccessRowById}
+            menu={
+              <Tooltip title="Opções">
+                <IconButton onClick={handleClickMenu}>
+                  <MoreHorizRounded />
+                </IconButton>
+              </Tooltip>
+            }
           />
         )}
+        <DefaultMenu
+          anchor={anchorEl}
+          menuItems={menuItems}
+          onClose={handleCloseMenu}
+          status={open}
+        />
         <DataTablePagination
           setPage={setPage}
           page={page}
@@ -138,17 +167,18 @@ const Indication = () => {
           rowsPerPage={rowsPerPage}
           count={count}
         />
+        <DefaultFilter
+          isOpen={filterModal}
+          items={filterItems}
+          onChangeFilter={setIndicationFilters}
+          onClose={() => setFilterModal(false)}
+          onOpen={() => setFilterModal(true)}
+          title="Filtrar Indicação"
+          changePage={setPage}
+        />
       </ContentBody>
-      <DefaultFilter
-        title="Filtrar indicações"
-        onChangeFilter={setFilters}
-        items={items}
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
-      /> */}
     </PageContentContainer>
   );
 };
 
-export default Indication;
+export default Indication

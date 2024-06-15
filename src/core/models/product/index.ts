@@ -1,7 +1,7 @@
 import { TBrandBody } from "../brand";
 import { TCategoryBody } from "../category";
+import { TCollectionBody } from "../collection";
 import { IPageable } from "../utils";
-import {TCollection} from "../collection";
 
 
 export type TCharacteristicsDTO = {
@@ -28,7 +28,7 @@ export type TProductRegister = {
     productCharacteristicsDTO: TProductCharacteristicsDTO;
 };
 
-export type TUpdateProduct = {
+export type TProductUpdate = {
     name: string;
     sku: string;
     amount: number;
@@ -52,18 +52,18 @@ export type TProductBody = {
     codManual: string;
     createdAt: string;
     updatedAt: string;
-    collection: TCollection;
+    collection: TCollectionBody;
     category: TCategoryBody;
     brand: TBrandBody;
 };
 
 export type TProductFilterRequest = {
-    name: string;
-    sku: string;
-    amount: number;
-    active: boolean;
-    qrCode: string;
-    codManual: string;
+    name: string | undefined;
+    sku: string | undefined;
+    amount: number | undefined;
+    active: boolean | undefined;
+    qrCode: string | undefined;
+    codManual: string | undefined;
 };
 
 export type TProductPageable = TProductFilterRequest & IPageable;

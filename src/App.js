@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-import './App.css';
 import Client from "./app/views/client/client";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Login from "./app/views/login/login";
@@ -11,7 +9,6 @@ import ProtectedRoute from "./core/utils/protectedRoute";
 import Supplier from "./app/views/supplier/supplier";
 import EditSupplier from "./app/views/editers/editSupplier";
 import RegisterSupplier from "./app/views/registers/registerSupplier";
-import RegisterIndication from "./app/views/registerIndication/registerIndication";
 import Indication from "./app/views/indication/indication";
 import RegisterCategory from "./app/views/registers/registerCategory";
 import Category from "./app/views/category/category";
@@ -24,6 +21,7 @@ import EditCollaborator from "./app/views/editers/editCollaborator";
 import RegisterCollaborator from "./app/views/registers/registerCollaborator";
 import {Sale} from "./app/views/sale/sale";
 import ForgotPassword from "./app/views/login/forgotPassword/ForgotPassword";
+import RegisterIndication from "./app/views/registers/registerIndication";
 
 function App() {
   return (

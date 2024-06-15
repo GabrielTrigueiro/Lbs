@@ -17,6 +17,7 @@ import useSideBarHook from "core/hooks/sideBarHook";
 import { useAppSelector } from "core/hooks/reduxHooks";
 import theme from "theme";
 import SideBarItem from "../sideBarItem/sideBarItem";
+import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 import { IconList, IconWrapper, LogoSidebarMax, LogoSidebarMin, SideBarBody, SideBarToggle } from "./styles";
 import { useEffect } from "react";
 
@@ -152,6 +153,18 @@ function SideBar() {
             icon={LabelIcon}
             link="/marcas"
             label="Marcas"
+            notAcceptGroup="CLIENT"
+            acepptRoles={[
+              "ROLE_SELLER",
+              "ROLE_INDICATIONS",
+              "ROLE_COURSES",
+              "ROLE_ADMIN",
+            ]}
+          />
+          <SideBarItem
+            icon={CollectionsBookmarkIcon}
+            link="/colecoes"
+            label="Coleções"
             notAcceptGroup="CLIENT"
             acepptRoles={[
               "ROLE_SELLER",
